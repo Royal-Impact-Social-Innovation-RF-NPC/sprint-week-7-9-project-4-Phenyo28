@@ -158,7 +158,7 @@ This manual provides step-by-step instructions on how to set up, operate, and ma
 
 ### Overview of the User Manual
     
- <img width="1919" height="1068" alt="Screenshot 2025-10-08 104910" src="https://github.com/user-attachments/assets/d8a00e32-70f2-40ea-842e-6576da1d3aa8" />
+<img width="1034" height="442" alt="image" src="https://github.com/user-attachments/assets/26cfc73b-4130-4711-ad95-efc511eff156" />
   
 
 ---
