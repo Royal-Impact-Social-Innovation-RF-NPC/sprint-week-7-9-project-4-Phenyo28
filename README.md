@@ -170,6 +170,9 @@ This manual provides step-by-step instructions on how to set up, operate, and ma
 ### DC Motor Testing
 <img width="1034" height="581" alt="image" src="https://github.com/user-attachments/assets/92533004-3a52-484d-9e83-21600f7949f6" />
 
+## 🎥 Demonstration
+Watch the robot in action: 
+
 
 ### Validation code testing
 <img width="838" height="531" alt="Screenshot 2025-10-11 111906" src="https://github.com/user-attachments/assets/8a631949-e4f8-4ee4-b20a-d3f3ce1b731f" />
