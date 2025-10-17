@@ -8,7 +8,6 @@ The main goal of this project is to demonstrate how autonomy and remote control 
 This assistive robot is designed for students, hobbyists, and beginners in robotics who want a hands-on learning experience with microcontrollers, sensors, and motor control.  
 It’s also suitable for educators, DIY makers, and anyone interested in experimenting with smart, remotely controlled robots.
 
-
 ## Features of the robot
 - Move forward, backward, turn.
 -	Avoid obstacles using 2 ultrasonic sensors.
@@ -26,6 +25,7 @@ It’s also suitable for educators, DIY makers, and anyone interested in experim
 | `Bill Of Materials`                   |     Bill Of Materials                             |
 | `README.md`               | README.md                |
 | `Robot User manual`      | Robot User Manual |
+| `ROBOT PERFOMANCE FLOW.docx` | Perfomance Workflow of the project |
 
 
 ---
@@ -34,8 +34,8 @@ It’s also suitable for educators, DIY makers, and anyone interested in experim
 
 | Component Name                                    | Purpose in Project                                                               | Quantity  | 
 | ------------------------------------------------- | -------------------------------------------------------------------------------- | --------- | 
-| **ESP32 Development Board**                       | Main controller for Wi-Fi/app communication, sensor reading, motor control logic | 1         | 
-| **Arduino Mega 2560**                     | Secondary controller , BLE features                    | 1         | 
+| **ESP32 Development Board**                       | Main brain - handles Bluetooth communication, commands from app, sensors or autonomous logic | 1         | 
+| **Arduino Mega 2560**                     | Motor controller - directly drives motors via L298N and executes movement logic                    | 1         | 
 | **L298N Motor Driver**                            | Drives 2 DC motors (direction + PWM speed control)                               | 1         |
 | **12V DC Geared Motors with Encoders**            | Propulsion with encoder feedback for odometry                                    | 2         | 
 | **Li-ion 18650 Battery Cells**                    | Main power source                                                                | 4         | 
@@ -58,36 +58,52 @@ It’s also suitable for educators, DIY makers, and anyone interested in experim
 
 ## Software Development
 ### Libraries Used
+| Library               | Purpose                                        | 
+| --------------------- | ---------------------------------------------- |
+| `BluetoothSerial.h`   | Enable Bluetooth communication                 | 
+| `NewPing.h`           | Optional, for structured data                  | 
 
 ### How the code works
 
 ## Wiring Diagram
+<img width="1033" height="869" alt="image" src="https://github.com/user-attachments/assets/909e8adf-dea3-4ca3-a866-1a265842c891" />
+
+--- 
 
 ## App Development
-I used MIT App Inventor to create a simple web-based control interface for the robot. The app allows the user to control the robot’s movement over Wi-Fi using buttons corresponding to forward, backward, left, right, and stop commands.
+I used MIT App Inventor to create a mobile app that allows me to control my robot’s movement via Bluetooth instead of Wi-Fi. The app communicates directly with the ESP32’s Bluetooth module, which then sends commands to the Arduino Mega for motor control.
 
-App Features
-1. Button Controls: Each button sends an HTTP request to the ESP32 web server.
-- Forward → /forward
-- Backward → /backward
-- Left → /left
-- Right → /right
-- Stop → /stop
-2. Wi-Fi Connection: The app connects to the same network as the ESP32 and uses the IP address of the ESP32 to send commands.
-3. Real-Time Control: Commands are sent instantly when the user presses a button.
+### App Features
+
+1. Button Controls
+Each button sends a short Bluetooth text command to the ESP32.
+- Forward - ``F``
+- Backward - ``B``
+- Left - ``L``
+- Right - ``R``
+- Stop - ``S``
+2. Bluetooth Connection
+- The user taps the “Connect” button to pair the app with the ESP32’s Bluetooth name (AutoNAV).
+- Once connected, the app can instantly send text commands.
+3. Real-Time Control
+- Commands are transmitted instantly when buttons are pressed.
+- The ESP32 forwards them through the serial connection to the Arduino Mega, which moves the motors accordingly.
 4. Implementation Notes
-- The MIT App Inventor blocks use the Web component to make HTTP GET requests to the ESP32.
-- No extra server setup is required, the ESP32 handles incoming requests directly.
-- This approach allows for a simple and lightweight mobile interface without the need for custom mobile apps or external servers.
+- The app uses the BluetoothClient component in MIT App Inventor.
+- Each button’s Click the block calls ``BluetoothClient.SendText("F")``
+- No Wi-Fi or web server is required - communication is handled entirely over Bluetooth.
+- This makes the system simpler, and usable anywhere without an internet connection.
 
-<img width="1920" height="1080" alt="Screenshot 2025-10-11 110515" src="https://github.com/user-attachments/assets/e31585ec-e2ff-413e-ab17-bc1a741629c0" />
+<img width="1920" height="974" alt="Screenshot 2025-10-16 114623" src="https://github.com/user-attachments/assets/403bf546-7a4d-41c0-8b54-4b94f64e913f" />
 
 ### Block Codes
-<img width="1920" height="979" alt="Screenshot 2025-10-11 081456" src="https://github.com/user-attachments/assets/fdd73fb4-3df1-4863-8a49-ac32540083c5" />
+<img width="1092" height="554" alt="image" src="https://github.com/user-attachments/assets/22b614b5-575b-44e0-aed0-495b09121504" />
 
 ### App QR code
-<img width="192" height="185" alt="Screenshot 2025-10-03 090527" src="https://github.com/user-attachments/assets/604e9efb-01ae-496d-97ff-f9005cff8c05" />
+<img width="142" height="144" alt="Screenshot 2025-10-16 180458" src="https://github.com/user-attachments/assets/2c8b22a7-185b-40a7-937b-34b62ad0dac5" />
 
+## Perfomance Workflow of the project
+<img width="1034" height="678" alt="image" src="https://github.com/user-attachments/assets/7861e97b-f021-4c8b-a05b-8c613bc96163" />
 
 ---
 
@@ -111,6 +127,12 @@ There were a few moments where the motors didn’t move or spun the wrong way, b
 <img width="1034" height="318" alt="image" src="https://github.com/user-attachments/assets/0edb2c25-37d2-4990-a753-0eeb8e3726ac" />
 
 <img width="697" height="444" alt="Screenshot 2025-10-11 112730" src="https://github.com/user-attachments/assets/bd679cfb-743f-4edd-8e2b-133d6d57f340" />
+
+---
+### Robot 
+<img width="426" height="757" alt="image" src="https://github.com/user-attachments/assets/cfa1b35a-a5fa-4dbf-b667-2f726dfa6306" /> <img width="416" height="756" alt="image" src="https://github.com/user-attachments/assets/79601458-e724-4e8e-8b4c-bf57d9ba9e21" />
+
+
 
 --- 
 ##  User Manual
@@ -158,7 +180,7 @@ This manual provides step-by-step instructions on how to set up, operate, and ma
 
 ### Overview of the User Manual
     
-<img width="1867" height="797" alt="Screenshot 2025-10-15 153137" src="https://github.com/user-attachments/assets/4c6f2428-4592-4cd3-be2a-a5d0c720f577" />
+<img width="1867" height="797" alt="Screenshot 2025-10-15 153137" src="https://github.com/user-attachments/assets/d4238f9f-2466-4b80-99b1-91beb50cf9bd" />
   
 
 ---
@@ -171,10 +193,8 @@ This manual provides step-by-step instructions on how to set up, operate, and ma
 <img width="1034" height="581" alt="image" src="https://github.com/user-attachments/assets/92533004-3a52-484d-9e83-21600f7949f6" />
 
 
-
 ### Validation code testing
 <img width="838" height="531" alt="Screenshot 2025-10-11 111906" src="https://github.com/user-attachments/assets/8a631949-e4f8-4ee4-b20a-d3f3ce1b731f" />
 
-## Demonstration
-Watch the robot in action: 
 
+Link to my demo Video: 
