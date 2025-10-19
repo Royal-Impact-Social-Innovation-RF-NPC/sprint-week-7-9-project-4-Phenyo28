@@ -20,7 +20,7 @@ It’s also suitable for educators, DIY makers, and anyone interested in experim
 ## Repository Contents
 | File / Folder                 | Description                                       |
 | ----------------------------- | ------------------------------------------------- |
-| `Arduino MEGA 2560 code.m`                     |Arduino mega code.ino           |
+| `Arduino MEGA 2560 code`                     |Arduino mega code.ino           |
 | `Media`       | Project Building.md                               |
 | `Bill Of Materials`                   |     Bill Of Materials                             |
 | `README.md`               | README.md                |
