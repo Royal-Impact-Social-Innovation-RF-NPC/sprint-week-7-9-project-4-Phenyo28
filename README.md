@@ -20,12 +20,13 @@ It’s also suitable for educators, DIY makers, and anyone interested in experim
 ## Repository Contents
 | File / Folder                 | Description                                       |
 | ----------------------------- | ------------------------------------------------- |
-| `Source Code`                     |Arduino IDE Code           |
+| `Arduino MEGA 2560 code.m`                     |Arduino mega code.ino           |
 | `Media`       | Project Building.md                               |
 | `Bill Of Materials`                   |     Bill Of Materials                             |
 | `README.md`               | README.md                |
 | `Robot User manual`      | Robot User Manual |
 | `ROBOT PERFOMANCE FLOW.docx` | Perfomance Workflow of the project |
+|`ESP32 code`               | ESP32 code.ino      |
 
 
 ---
